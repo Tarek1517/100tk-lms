@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers\Frontend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+        return inertia('Frontend/Home/Index');
+
+    }
+    public function categoryCourse()
+    {
+        return inertia('Frontend/Course/Category');
+
+    }
+    }
