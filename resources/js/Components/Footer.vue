@@ -1,11 +1,11 @@
 <script setup>
 
-import Section from "@/Components/Section.vue";
+import Section from "@/Components/Home/Section.vue";
 import Container from "@/Components/Container.vue";
 </script>
 
 <template>
-    <section class="bg-[#181E23]">
+    <section class="bg-gray-600">
         <Container>
             <div class="flex flex-col lg:flex-row py-10 ">
                 <div class="w-full lg:w-1/4">

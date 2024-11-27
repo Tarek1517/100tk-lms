@@ -1,7 +1,7 @@
 <script setup>
 import HeroSection from "@/Components/Home/HeroSection.vue";
 import CategorySection from "@/Components/Home/CategorySection.vue";
-import Section from "@/Components/Section.vue";
+import Section from "@/Components/Home/Section.vue";
 </script>
 
 <template>

@@ -35,11 +35,12 @@ import CourseCard from "@/Components/CourseCard.vue";
                             <img class="w-full h-full object-cover" src="https://images.pexels.com/photos/7947716/pexels-photo-7947716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
                         </div>
                         <div class="p-4">
-                            <h2 class="text-3xl font-bold text-secondary  "> Fee ৳ 100</h2>
+                            <h2 class="text-3xl font-bold text-primary"> Fee ৳ 100</h2>
                             <div class=" border-b">
-                                <RouterLink to="/" class="flex items-center justify-center gap-2 bg-secondary w-full text-center text-base py-3 my-5 font-semibold rounded-lg">
+                                <Link href="/" class="flex items-center justify-center text-white gap-2 bg-secondary hover:bg-primary
+                                 w-full text-center text-base py-3 my-5 font-semibold rounded-lg transition-all ease-in-out duration-500">
                                     Enroll Now This Course <Icon name="material-symbols:arrow-forward-ios-rounded" />
-                                </RouterLink>
+                                </Link>
                             </div>
                             <h4 class="text-base font-semibold pt-5 text-gray-500">In this course you get</h4>
                             <ul class="flex flex-wrap gap-2  py-4 text-gray-500 -mx-3">
@@ -55,7 +56,7 @@ import CourseCard from "@/Components/CourseCard.vue";
                 <div>
                     <h3 class="text-2xl lg:text-4xl font-bold border-b pb-3 mt-8 ">You might be interested in</h3>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-7 my-8 " >
-                        <CourseCard v-for="item in 3"   />
+                        <CourseCard v-for="item in 3" />
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <script setup>
 
 import AppLayout from "@/Layouts/AppLayout.vue";
-import Section from "@/Components/Section.vue";
+import Section from "@/Components/Home/Section.vue";
 import CourseCard from "@/Components/CourseCard.vue";
 import Container from "@/Components/Container.vue";
 </script>

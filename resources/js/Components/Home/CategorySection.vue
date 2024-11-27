@@ -4,7 +4,7 @@ import Container from "@/Components/Container.vue";
 </script>
 
 <template>
-    <section class="lg:py-20">
+    <section class="">
         <Container>
             <div class="flex flex-wrap lg:-mx-8">
                 <div class="w-full lg:w-1/2 px-8">
@@ -16,7 +16,7 @@ import Container from "@/Components/Container.vue";
                                    <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
                                </div>
                                 <div class="flex items-center order-first lg:order-none">
-                                    <span class="size-16 lg:size-20 bg-primary text-white font-bold text-base lg:text-2xl rounded-full border flex items-center justify-center">
+                                    <span class="size-16 lg:size-20 bg-secondary text-white font-bold text-base lg:text-2xl rounded-full border flex items-center justify-center">
                                         BCS
                                     </span>
                                 </div>
@@ -29,7 +29,7 @@ import Container from "@/Components/Container.vue";
                         <ul class="w-full mb-6" v-for="item in 5">
                             <li class="flex gap-4 ">
                                 <div class="flex items-center">
-                                    <span class="size-16 lg:size-20 bg-primary text-white font-bold text-base lg:text-2xl rounded-full border flex items-center justify-center">
+                                    <span class="size-16 lg:size-20 bg-secondary text-white font-bold text-base lg:text-2xl rounded-full border flex items-center justify-center">
                                         BCS
                                     </span>
                                 </div>

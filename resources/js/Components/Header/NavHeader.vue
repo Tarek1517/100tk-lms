@@ -7,10 +7,9 @@
         <Container>
             <div class="flex items-center justify-between py-2">
                 <div class="flex items-center gap-2">
-                    <div class="w-16 h-16">
+                    <Link href="/" class="w-16 h-16">
                         <img class="w-full h-auto" src="@/assets/images/education-logo.png" alt="">
-                    </div>
-                    <p class="text-2xl font-bold ">100৳ -<span class="font-normal">LMS</span> </p>
+                    </Link>
                 </div>
                 <div>
                     <ul class="flex gap-7 text-sm font-medium">

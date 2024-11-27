@@ -11,7 +11,7 @@ Route::get('/category', [HomeController::class, 'categoryCourse']);
 Route::resource('courses', \App\Http\Controllers\Frontend\CourseController::class);
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard/Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

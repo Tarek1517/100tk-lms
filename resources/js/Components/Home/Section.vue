@@ -58,7 +58,7 @@
                </swiper>
            </div>
            <div class="flex justify-end">
-               <button v-if="viewDetails" class="flex items-center gap-3 border border-primary px-4 py-1 text-lg font-normal my-10 rounded hover:text-primary transition-all ease-in-out duration-500">
+               <button v-if="viewDetails" class="flex items-center gap-3 border border-secondary text-secondary px-4 py-1 text-lg font-normal my-10 rounded hover:text-primary transition-all ease-in-out duration-500">
                    {{ viewDetails }}
                    <Icon name="material-symbols:line-end-arrow-notch" class="text-xl text-primary" />
                </button>
