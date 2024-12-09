@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CourseCategoryController;
+use App\Http\Controllers\Dashboard\CourseController;
+use App\Http\Controllers\Dashboard\StudentController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -12,7 +15,15 @@ Route::resource('courses', \App\Http\Controllers\Frontend\CourseController::clas
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('dashboard')->group(function():void{
+    Route::resource('student', StudentController::class);
+   Route::resource('course', CourseController::class);
+   Route::resource('category', CourseCategoryController::class);
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

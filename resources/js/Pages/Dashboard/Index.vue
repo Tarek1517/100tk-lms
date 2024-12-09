@@ -174,6 +174,5 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
                 </tbody>
             </table>
         </div>
-
     </AuthenticatedLayout>
 </template>

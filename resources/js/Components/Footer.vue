@@ -17,12 +17,12 @@ import Container from "@/Components/Container.vue";
                     </div>
                 </div>
                 <div class="w-full lg:w-1/4">
-                    <div class="flex justify-center lg:justify-start gap-5 lg:gap-10 pt-6 lg:pt-0" >
+                    <div class="flex justify-center lg:justify-start gap-5 lg:gap-10 pt-6 lg:pt-0 mb-5 lg:mb-0" >
                         <div class="text-center lg:text-left text-white">
                             <h2 class="text-xl font-bold mb-5">আমাদের সম্পর্কে</h2>
                             <ul class="font-medium text-sm lg:text-base ">
+                                <li class="hover:text-secondary lg:pb-3"><Link href ="/">Company info.</Link></li>
                                 <li class="hover:text-secondary lg:pb-3"><Link href ="/">FAQs</Link></li>
-                                <li class="hover:text-secondary lg:pb-3"><Link href ="/">Contact</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -32,9 +32,11 @@ import Container from "@/Components/Container.vue";
                         <h2 class="text-xl font-bold mb-5">আমাদের নীতি</h2>
                         <ul class="font-medium text-sm lg:text-base ">
                             <li class="hover:text-secondary lg:pb-3"><Link href="/">Enroll Rule</Link></li>
-                            <li class="hover:text-secondary lg:pb-3"><Link href="/">Refunding System</Link></li>
+                            <li class="hover:text-secondary lg:pb-3"><Link href="/">Refunding Policy</Link></li>
                             <li class="hover:text-secondary lg:pb-3"><Link href="/">Class Rules</Link></li>
-                            <li class="hover:text-secondary lg:pb-3"><Link href="/">Addmission</Link></li>
+                            <li class="hover:text-secondary lg:pb-3"><Link href="/">Payment Rules</Link></li>
+                            <li class="hover:text-secondary lg:pb-3"><Link href="/">Terms</Link></li>
+                            <li class="hover:text-secondary lg:pb-3"><Link href="/">Conditions</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -42,9 +44,9 @@ import Container from "@/Components/Container.vue";
                     <div class=" text-center lg:text-left text-white pt-6 lg:pt-0">
                         <h2 class="text-xl font-bold mb-5">যোগাযোগ</h2>
                         <ul class="text-sm lg:text-base">
-                            <li class="lg:pb-3">Call Us:  +880 000 00000(24x7)</li>
-                            <li class="lg:pb-3">whatsapp:  +880 000 00000</li>
-                            <li class="lg:pb-3">Outside Bangladesh:  +880 000 00000</li>
+                            <li class="lg:pb-3">Call Us:  IB ** (10am - 10pm)</li>
+                            <li class="lg:pb-3">whatsapp:  +880 1870 729 192</li>
+                            <li class="lg:pb-3">Email:  100tkedu.info@gmail.com</li>
                         </ul>
                     </div>
                     <div>

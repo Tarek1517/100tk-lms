@@ -5,40 +5,18 @@ import Container from "@/Components/Container.vue";
 
 <template>
     <section class="">
+
         <Container>
-            <div class="flex flex-wrap lg:-mx-8">
-                <div class="w-full lg:w-1/2 px-8">
-                    <div>
-                        <ul class="w-full mb-6" v-for="item in 5">
-                            <li class="flex gap-4 justify-end">
-                               <div class=" lg:p-4 lg:text-end order-last lg:order-none">
-                                    <h2 class="font-bold text-base lg:text-xl">Lorem ipsum dolor sit amet.</h2>
-                                   <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                               </div>
-                                <div class="flex items-center order-first lg:order-none">
-                                    <span class="size-16 lg:size-20 bg-secondary text-white font-bold text-base lg:text-2xl rounded-full border flex items-center justify-center">
-                                        BCS
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 px-8">
-                    <div>
-                        <ul class="w-full mb-6" v-for="item in 5">
-                            <li class="flex gap-4 ">
-                                <div class="flex items-center">
-                                    <span class="size-16 lg:size-20 bg-secondary text-white font-bold text-base lg:text-2xl rounded-full border flex items-center justify-center">
-                                        BCS
-                                    </span>
-                                </div>
-                                <div class=" lg:p-4 ">
-                                    <h2 class="font-bold text-base lg:text-xl">Lorem ipsum dolor sit amet.</h2>
-                                    <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                                </div>
-                            </li>
-                        </ul>
+            <div class="">
+                <div class="relative z-20 grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-7  ">
+                    <div class=" p-4 h-44 flex flex-col items-center justify-center shadow-xl  relative  rounded-xl overflow-hidden
+                         bg-[url('https://img.freepik.com/premium-vector/back-school-background_42775-128.jpg?ga=GA1.1.1129155627.1730873252&semt=ais_hybrid')]"
+                            v-for="item in 8" >
+                        <span class="absolute w-full h-full left-0 right-0 bottom-0 top-0 bg-black opacity-50"></span>
+                        <div class="relative z-10 text-center">
+                            <h2 class="font-bold text-sm lg:text-xl mb-3 text-white">ভর্তি পরীক্ষার প্রস্তুতি</h2>
+                            <p class="text-xs lg:text-sm text-gray-400">MCQ পরীক্ষার প্রস্তুতি একাডেমিক পড়াশোনা একাডেমিক পড়াশোনা</p>
+                        </div>
                     </div>
                 </div>
             </div>

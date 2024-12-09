@@ -22,7 +22,7 @@
                     <div class="flex gap-4 ">
                         <div class="flex items-center text-base font-semibold text-white gap-1">
                             <Icon name="material-symbols:person" class="text-xl" />
-                            <p class="hover:text-primary transition-all ease-in-out duration-500">Login / Register</p>
+                            <Link href="/login" class="hover:text-primary transition-all ease-in-out duration-500">Login / Register</Link>
                         </div>
                         <span class="border-r-2 border-gray-700"></span>
                         <div class="flex items-center text-base font-semibold text-white gap-3">

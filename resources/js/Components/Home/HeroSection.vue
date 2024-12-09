@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <Section class="bg-[url('https://html.rrdevs.net/edcare/assets/img/shapes/hero-shape-3.png')] bg-no-repeat h-auto py-12 pt-20 lg:pt-0">
+    <Section class="bg-[url('https://html.rrdevs.net/edcare/assets/img/shapes/hero-shape-3.png')] bg-no-repeat h-auto py-12 pt-16 lg:pt-0">
         <Container>
             <div class="flex flex-wrap items-center lg:-mx-5">
                 <div class="w-full lg:w-1/2 px-5">
