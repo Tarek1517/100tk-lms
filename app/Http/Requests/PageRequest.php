@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CourseRequest extends FormRequest
+class PageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class CourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|max:255|unique:pages',
+            'content' => 'required'
         ];
     }
+
+    protected $stopOnFristFailure = true;
 }

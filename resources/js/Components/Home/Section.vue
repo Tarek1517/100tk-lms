@@ -3,6 +3,7 @@
     import Container from "@/Components/Container.vue";
     const props = defineProps({
         title: String,
+        courses: Array,
         viewDetails: String,
     })
 
@@ -52,8 +53,8 @@
                 }"
                class="mySwiper"
                >
-                   <swiper-slide v-for="item in 9">
-                        <CourseCard />
+                   <swiper-slide v-for="course in courses" :key="course.id">
+                        <CourseCard :course="course" />
                    </swiper-slide>
                </swiper>
            </div>

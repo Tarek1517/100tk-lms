@@ -8,9 +8,9 @@ import TopBar from "@/Components/Dashboard/TopBar.vue";
 </script>
 
 <template>
-        <SideBar />
-        <TopBar />
-        <main class="ml-60 p-4 mt-20">
-            <slot />
-        </main>
+    <SideBar />
+    <TopBar />
+    <main class="ml-60 p-4 mt-20">
+        <slot />
+    </main>
 </template>

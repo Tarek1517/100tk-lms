@@ -2,18 +2,28 @@
 import HeroSection from "@/Components/Home/HeroSection.vue";
 import CategorySection from "@/Components/Home/CategorySection.vue";
 import Section from "@/Components/Home/Section.vue";
+
+const props = defineProps({
+    home_categories: Array,
+    course_categories: Array,
+    settings: Object,
+    auth: Object,
+});
 </script>
 
 <template>
-    <AppLayout>
+    <AppLayout :settings="settings" :auth="auth">
         <HeroSection />
-        <CategorySection />
-        <Section title="BCS পরীক্ষার প্রস্তুতি" viewDetails="BCS Details" />
-        <Section title="Bank Job পরীক্ষার প্রস্তুতি" viewDetails="Bank Job Details" />
+        <CategorySection :home_categories="home_categories" />
+        <div class="mt-5 mb-10">
+            <Section
+                v-for="category in course_categories"
+                :key="category.id"
+                :title="category.name"
+                :courses="category.course"
+            />
+        </div>
     </AppLayout>
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

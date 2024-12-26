@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use Inertia\Inertia;
+use \App\Models\CourseCategory;
+use function App\Http\Helpers\getSetting;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -30,15 +33,35 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return [
-            ...parent::share($request),
+        // Global settings for the frontend
+        $settings = [
+            'header_categories' => json_decode(getSetting('header_categories')),
+            'currency_symbol' => getSetting('currency_symbol'),
+            'address' => getSetting('address'),
+            'email' => getSetting('email'),
+            'phone' => getSetting('phone'),
+            'facebook_link' => getSetting('facebook_link'),
+            'youtube_link' => getSetting('youtube_link'),
+            'instagram_link' => getSetting('instagram_link'),
+            'linkedin_link' => getSetting('linkedin_link'),
+            'Skype_link' => getSetting('Skype_link'),
+           
+        ];
+
+        return array_merge(parent::share($request), [
+            // Authentication data
             'auth' => [
-                'user' => $request->user(),
+                'validStudent' => $request->user('student') ? $request->user('student')->only('id', 'name', 'email') : null,
             ],
-            'ziggy' => fn () => [
+            // Ziggy routes
+            'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-        ];
+            // Global settings
+            'settings' => $settings,
+        ]);
     }
+
+
 }
