@@ -45,14 +45,10 @@ class Student extends Authenticatable implements CanResetPassword
         'password' => 'hashed',
     ];
 
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    // public function sendPasswordResetNotification($token)
-    // {
-    //     $this->notify(new CustomerResetPasswordNotification($token));
-    // }
+    public function courses()
+{
+    return $this->belongsToMany(Course::class, 'student_courses', 'student_id', 'course_id');
+}
+
+
 }

@@ -30,4 +30,12 @@ class Course extends Model
     {
         return $this->hasMany(CourseClass::class); // Correct the model name if needed
     }
+    public function order()
+    {
+        return $this->hasMany(Order::class); // Correct the model name if needed
+    }
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'student_courses', 'course_id', 'student_id');
+    }
 }

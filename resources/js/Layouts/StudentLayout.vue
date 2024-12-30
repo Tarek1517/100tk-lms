@@ -6,7 +6,7 @@ import { Inertia } from "@inertiajs/inertia";
 <template>
     <StdDashboardLayout :settings="settings" isStudent>
         <div
-            class="student-layout flex justify-center items-start w-full h-full py-10 mb-10"
+            class="student-layout flex justify-center items-start w-full h-full mb-10"
         >
             <!-- Wrapper for full width -->
             <div class="flex w-full h-full overflow-hidden">

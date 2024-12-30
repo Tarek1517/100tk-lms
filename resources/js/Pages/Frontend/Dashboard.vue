@@ -2,6 +2,7 @@
 import StudentLayout from "@/Layouts/StudentLayout.vue";
 import Dash from "@/Pages/Frontend/StudentDashboard/Dash.vue";
 
+
 const props = defineProps({
     settings: Object,
 });

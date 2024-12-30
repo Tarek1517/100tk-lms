@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use \App\Models\CourseCategory;
+use \App\Models\Course;
 
 use function App\Http\Helpers\getSetting;
 
@@ -58,7 +59,12 @@ class HomeController extends Controller
     }
     public function categoryCourse()
     {
-        return inertia('Frontend/Course/Category');
+        $AllCourses = Course::with('courseClass')
+            ->get();
+        return Inertia::render('Frontend/Course/Category', [
+            'AllCourses' => $AllCourses,
+        ]);
+       
 
     }
 }

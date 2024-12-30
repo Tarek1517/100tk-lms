@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use function App\Http\Helpers\getSetting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
-use Inertia\Inertia;
 use \App\Models\CourseCategory;
-use function App\Http\Helpers\getSetting;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -33,8 +32,33 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        // Global settings for the frontend
+        // Fetch home categories from settings
+        $categoryIds = json_decode(getSetting('home_categories'));
+        $HomeCategories = [];
+        if ($categoryIds !== null && count($categoryIds) > 0) {
+            $HomeCategories = CourseCategory::whereIn('id', $categoryIds ?? [])
+                ->select('id', 'slug', 'image', 'name', 'parent_id', 'subtitle')
+                ->with('children:id,name,slug,parent_id,image,subtitle')
+                ->orderBy('order_number')
+                ->get();
+        }
+
+        // Fetch course categories from settings
+        $CoursecategoryIds = json_decode(getSetting('course_categories'));
+        $CourseCategories = [];
+        if ($CoursecategoryIds !== null && count($CoursecategoryIds) > 0) {
+            $CourseCategories = CourseCategory::whereIn('id', $CoursecategoryIds ?? [])
+                ->with(
+                    'course:id,category_id,title,cover_image,price,short_description,description',
+                    'course.courseClass'
+                )
+                ->get();
+        }
+
+        // Fetch general settings for the app
         $settings = [
+            'home_categories' => $HomeCategories,
+            'course_categories' => $CourseCategories,
             'header_categories' => json_decode(getSetting('header_categories')),
             'currency_symbol' => getSetting('currency_symbol'),
             'address' => getSetting('address'),
@@ -45,23 +69,26 @@ class HandleInertiaRequests extends Middleware
             'instagram_link' => getSetting('instagram_link'),
             'linkedin_link' => getSetting('linkedin_link'),
             'Skype_link' => getSetting('Skype_link'),
-           
         ];
 
         return array_merge(parent::share($request), [
-            // Authentication data
+            // Authenticated student data
             'auth' => [
-                'validStudent' => $request->user('student') ? $request->user('student')->only('id', 'name', 'email') : null,
+                'validStudent' => $request->user('student')
+                ? $request->user('student')->only('id', 'name', 'email')
+                : null,
             ],
-            // Ziggy routes
+
+            // Ziggy routes and location
             'ziggy' => fn() => [
-                ...(new Ziggy)->toArray(),
+                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            // Global settings
+
+            // Share settings globally
             'settings' => $settings,
+            'home_categories' => $settings['home_categories'],
+            'course_categories' => $settings['course_categories'],
         ]);
     }
-
-
 }

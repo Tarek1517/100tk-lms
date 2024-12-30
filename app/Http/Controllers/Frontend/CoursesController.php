@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use \App\Models\Course;
 
-class CourseController extends Controller
+class CoursesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +38,15 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        return inertia('Frontend/Course/Show');
+        $AllCourses = Course::with('courseClass')
+            ->orderBy('created_at', 'desc') // Order by 'created_at' in descending order
+            ->get();
+
+        $showCourse = Course::with('category', 'courseClass')->findOrFail($id);
+        return Inertia::render('Frontend/Course/Show', [
+            'showCourse' => $showCourse,
+            'AllCourses' => $AllCourses,
+        ]);
     }
 
     /**
@@ -61,5 +71,13 @@ class CourseController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function checkout(string $id)
+    {
+        $showCourse = Course::with('category', 'courseClass')->findOrFail($id);
+        return Inertia::render('Frontend/Course/CheckOut', [
+            'showCourse' => $showCourse,
+        ]);
     }
 }

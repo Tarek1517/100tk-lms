@@ -37,39 +37,23 @@ const logout = async () => {
                         name="bxs:dashboard"
                         class="text-2xl transition-all ease-in-out duration-500"
                     />
-                    <span
-                        class="transition-all ease-in-out duration-500"
-                        >Dashboard</span
+                    <span class="transition-all ease-in-out duration-500"
+                        >ড্যাশবোর্ড</span
                     >
                 </Link>
             </li>
+
             <li>
                 <Link
-                    href="/students/courses"
-                    class="group flex items-center gap-3 cursor-pointer relative p-2 hover:bg-secondary/10 hover:rounded-lg transition-all ease-in-out duration-500"
-                >
-                    <Icon
-                        name="ph:student-fill"
-                        class="text-2xl transition-all ease-in-out duration-500"
-                    />
-                    <span
-                        class="transition-all ease-in-out duration-500"
-                        >Student</span
-                    >
-                </Link>
-            </li>
-            <li>
-                <Link
-                    href="/students/settings"
+                    :href="`/Coures/${user.id}`"
                     class="group flex items-center gap-3 cursor-pointer relative p-2 hover:bg-secondary/10 hover:rounded-lg transition-all ease-in-out duration-500"
                 >
                     <Icon
                         name="material-symbols:book-5"
                         class="text-2xl transition-all ease-in-out duration-500"
                     />
-                    <span
-                        class="transition-all ease-in-out duration-500"
-                        >Courses</span
+                    <span class="transition-all ease-in-out duration-500"
+                        >আপনার কোর্স </span
                     >
                 </Link>
             </li>
@@ -83,9 +67,8 @@ const logout = async () => {
                         name="hugeicons:settings-02"
                         class="text-2xl transition-all ease-in-out duration-500"
                     />
-                    <span
-                        class="transition-all ease-in-out duration-500"
-                        >Settings</span
+                    <span class="transition-all ease-in-out duration-500"
+                        >সেটিংস</span
                     >
                 </Link>
             </li>
@@ -99,9 +82,8 @@ const logout = async () => {
                         name="lucide:log-out"
                         class="text-2xl transition-all ease-in-out duration-500"
                     />
-                    <span
-                        class="transition-all ease-in-out duration-500"
-                        >Log Out</span
+                    <span class="transition-all ease-in-out duration-500"
+                        >লগ আউট</span
                     >
                 </Link>
             </li>

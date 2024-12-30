@@ -10,7 +10,7 @@ import TopBar from "@/Components/Header/TopBar.vue";
 <template>
     <SideBar />
     <TopBar />
-    <main class="ml-60 p-4 mt-20">
+    <main class="ml-60 p-4 mt-10">
         <slot />
     </main>
 </template>

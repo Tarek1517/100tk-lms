@@ -16,7 +16,7 @@ const props = defineProps({
     <div class=" fixed top-0 bg-white left-0 right-0 z-50 border-b shadow-lg">
 
             <div class="flex items-center justify-between py-3 px-12">
-                <Link href="/dashboard" class="flex items-center gap-2">
+                <Link href="/" class="flex items-center gap-2">
                     <span  class="text-white">
                         <img class="w-auto h-12" src="@/assets/images/education-logo.png">
                     </span>

@@ -59,7 +59,7 @@ const props = defineProps({
                 {{ course.price }}৳
             </p>
             <Link
-                :href="`/courses/${course.id}`"
+                href="/courses/3"
                 class="flex items-center gap-1 text-sm lg:text-base text-secondary font-semibold px-4 py-1 border rounded-full hover:border-primary transition-all ease-in-out duration-500"
             >
                 View Details
