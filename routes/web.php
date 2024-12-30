@@ -62,16 +62,17 @@ Route::middleware('auth:student')->group(function () {
     Route::get('/Coures/{slug}/show', [StudentDashboardController::class, 'show'])->name('Coures.show');
 
     //SslCommerz route
-    Route::post('/pay', [\App\Http\Controllers\SslCommerzPaymentController::class, 'index']);
+    Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+
+    Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+    Route::post('/fail', [SslCommerzPaymentController::class, 'cancel']);
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
 
 });
 
-Route::post('/ipn', [\App\Http\Controllers\SslCommerzPaymentController::class, 'ipn']);
 
-Route::post('/success', [\App\Http\Controllers\SslCommerzPaymentController::class, 'success']);
-Route::post('/fail', [\App\Http\Controllers\SslCommerzPaymentController::class, 'cancel']);
-Route::post('/cancel', [\App\Http\Controllers\SslCommerzPaymentController::class, 'cancel']);
 
 Route::get('/all-categories', function () {
     return \App\Models\CourseCategory::get();

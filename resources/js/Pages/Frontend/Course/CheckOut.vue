@@ -6,6 +6,7 @@ import { usePage } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { computed } from "vue";
 import { toast } from "vue3-toastify";
+import axios from "axios";
 
 const props = defineProps({
     settings: {
@@ -35,17 +36,11 @@ const form = useForm({
     payment_method: "SSL_Commerz",
 });
 
-const addPayment = async () => {
-    try {
-        await form.post("/save_order", {
-            forceFormData: true,
-            preserveScroll: true,
-        });
-        toast.success("Order Added Successfully");
-    } catch (error) {
-        console.error("Error occurred:", error);
-        toast.error("Failed to add order. Please try again.");
-    }
+const addPayment = async () => form.post("/save_order");
+
+const order = async () => {
+    const res = await axios.post("http://localhost:8000/save_order", form);
+    window.location.replace(res.data?.data);
 };
 </script>
 
@@ -138,9 +133,9 @@ const addPayment = async () => {
                         <li>
                             <strong class="font-medium">Bank Transfer</strong>
                         </li>
-                        <form @submit="addPayment">
+                        <div @click="order">
                             <button type="submit">Pay Now</button>
-                        </form>
+                        </div>
                     </ul>
                 </div>
             </div>
