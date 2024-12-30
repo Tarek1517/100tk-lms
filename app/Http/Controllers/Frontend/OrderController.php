@@ -43,14 +43,16 @@ class OrderController extends Controller
         }
         $OrderData = $request->validated();
 
-        $OrderData['order_code'] = 'ORD-' . strtoupper(Str::random(8)) . '-' . now()->format('YmdHis');
+        $OrderData['order_code'] = 
         $paymentResponse = $paymentService->initiatePayment($OrderData);
 
         if (isset($paymentResponse['status']) && $paymentResponse['status'] == 'fail') {
             return response()->json(['message' => 'Payment initiation failed'], 400);
         }
-        
-        return Inertia::location(route('course.checkout', ['id' => $OrderData['course_id']]));
+
+		$response = json_decode($paymentResponse, true);
+		return response()->json($response);
+        // return Inertia::location(route('course.checkout', ['id' => $OrderData['course_id']]));
 
     }
 

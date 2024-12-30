@@ -35,25 +35,21 @@ const form = useForm({
     payment_method: "SSL_Commerz",
 });
 
-const addPayment = async () => {
-    try {
-        await form.post("/save_order", {
-            forceFormData: true,
-            preserveScroll: true,
-        });
-        toast.success("Order Added Successfully");
-    } catch (error) {
-        console.error("Error occurred:", error);
-        toast.error("Failed to add order. Please try again.");
-    }
-};
+const addPayment = async () => form.post("/save_order");
+
+import axios from "axios";
+
+const order = async () => {
+	const res = await axios.post('http://localhost:8000/save_order', form);
+	window.location.replace(res.data?.data);
+}
 </script>
 
 <template>
     <AppLayout :settings="settings" :auth="auth">
         <Container class="mb-10 pb-11 pt-5">
             <div class="flex space-x-8 p-8 border-b border-primary/10">
-                <h2 class="font-bold text-2xl">কমপ্লিট পেমেন্ট</h2>
+                <h2 class="font-bold text-2xl">কমপ্লিট পেমেন্ট{{res}}</h2>
             </div>
             <div class="flex space-x-8 p-8">
                 <div class="w-1/2 bg-white">
@@ -138,9 +134,9 @@ const addPayment = async () => {
                         <li>
                             <strong class="font-medium">Bank Transfer</strong>
                         </li>
-                        <form @submit="addPayment">
+                        <div @click="order">
                             <button type="submit">Pay Now</button>
-                        </form>
+                        </div>
                     </ul>
                 </div>
             </div>

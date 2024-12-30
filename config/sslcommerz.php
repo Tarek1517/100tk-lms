@@ -14,8 +14,8 @@ return [
     ],
     'apiDomain' => $apiDomain,
     'connect_from_localhost' => env("IS_LOCALHOST", false),
-    'success_url' => '/api/success',
-    'failed_url' => '/api/fail',
-    'cancel_url' => '/api/cancel',
+    'success_url' => '/success',
+    'failed_url' => '/fail',
+    'cancel_url' => '/cancel',
     'ipn_url' => '/ipn',
 ];
