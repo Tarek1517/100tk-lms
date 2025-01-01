@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 // use App\Notifications\CustomerResetPasswordNotification;
 
 class Student extends Authenticatable implements CanResetPassword
@@ -46,9 +47,8 @@ class Student extends Authenticatable implements CanResetPassword
     ];
 
     public function courses()
-{
-    return $this->belongsToMany(Course::class, 'student_courses', 'student_id', 'course_id');
-}
-
+    {
+        return $this->belongsToMany(Course::class, 'student_courses', 'student_id', 'course_id');
+    }
 
 }

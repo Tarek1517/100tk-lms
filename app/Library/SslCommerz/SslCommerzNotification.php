@@ -226,6 +226,7 @@ class SslCommerzNotification extends AbstractSslCommerz
     {
         $this->successUrl = rtrim(env('APP_URL'), '/') . $this->config['success_url'];
     }
+    
 
     protected function getSuccessUrl()
     {

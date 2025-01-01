@@ -24,7 +24,7 @@ const questionState = useForm({
 });
 
 const onUpdate = () => {
-    // Loop over the questions and update each one using its id
+    
     questionState.questions.forEach((question) => {
         questionState.put(`/dashboard/exam-question/${question.id}`, {
             preserveScroll: true,

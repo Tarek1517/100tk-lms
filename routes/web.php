@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\QuestionController;
 use App\Http\Controllers\Frontend\StudentsAuthController;
 use App\Http\Controllers\Frontend\StudentLoginController;
 use App\Http\Controllers\Frontend\STDdashboard\StudentDashboardController;
+use App\Http\Controllers\Frontend\STDdashboard\OrderSuccessController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Dashboard\PageControler;
 use App\Http\Controllers\Dashboard\StudentExamAttemtController;
@@ -23,9 +24,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::post('/order-success', function () {
-    return Inertia::render('Frontend/Course/ThankYou');
-});
+// Route::post('/order-success', function () {
+//     return Inertia::render('Frontend/Course/ThankYou');
+// });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/category', [HomeController::class, 'categoryCourse']);
@@ -38,13 +39,14 @@ Route::post('/Student/store', [StudentLoginController::class, 'store'])->name('S
 Route::post('/Student/Login/store', [StudentsAuthController::class, 'loginSubmit'])->name('Student.Login.store');
 Route::post('/Login/store', [StudentsAuthController::class, 'login'])->name('Login.store');
 Route::get('/Student/Register', [StudentLoginController::class, 'register'])->name('Student.Register');
+Route::post('/order-success', [OrderSuccessController::class, 'index'])->name('order-success');
 
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('dashboard')->group(function (): void {
+Route::prefix('dashboard')->middleware('auth')->group(function (): void {
     Route::resource('student', StudentController::class);
     Route::resource('course', CourseController::class);
     Route::resource('category', CourseCategoryController::class);

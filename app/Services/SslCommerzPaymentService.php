@@ -37,6 +37,7 @@ class SslCommerzPaymentService
             // Optional
             'value_a' => "ref001",
             'value_b' => "ref002",
+            'value_c' => $data['course_id'],
         ];
 
         // Create Order with Pending status
