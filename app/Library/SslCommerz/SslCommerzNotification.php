@@ -186,16 +186,24 @@ class SslCommerzNotification extends AbstractSslCommerz
      */
     public function makePayment(array $requestData, $type = 'checkout', $pattern = 'json')
     {
-
         if (empty($requestData)) {
             return "Please provide a valid information list about transaction with transaction id, amount, success url, fail url, cancel url, store id and pass at least";
         }
+
         $header = [];
+
         $this->setApiUrl($this->config['apiDomain'] . $this->config['apiUrl']['make_payment']);
+
+        // Set the required/additional params
         $this->setParams($requestData);
+
+        // Set the authentication information
         $this->setAuthenticationInfo();
+
+        // Now, call the Gateway API
         $response = $this->callToApi($this->data, $header, $this->config['connect_from_localhost']);
-        $formattedResponse = $this->formatResponse($response, $type, $pattern);
+
+        $formattedResponse = $this->formatResponse($response, $type, $pattern); // Here we will define the response pattern
 
         if ($type == 'hosted') {
             if (!empty($formattedResponse['GatewayPageURL'])) {
@@ -206,6 +214,7 @@ class SslCommerzNotification extends AbstractSslCommerz
                 } else {
                     $message = "Check the SSLCZ_TESTMODE and SSLCZ_STORE_PASSWORD value in your .env; DO NOT USE MERCHANT PANEL PASSWORD HERE.";
                 }
+
                 return $message;
             }
         } else {
@@ -215,8 +224,9 @@ class SslCommerzNotification extends AbstractSslCommerz
 
     protected function setSuccessUrl()
     {
-        $this->successUrl = env('FRONTEND_URL') . '/dashboard/order';
+        $this->successUrl = rtrim(env('APP_URL'), '/') . $this->config['success_url'];
     }
+
     protected function getSuccessUrl()
     {
         return $this->successUrl;
@@ -394,6 +404,7 @@ class SslCommerzNotification extends AbstractSslCommerz
 
         $this->data['product_name'] = (isset($info['product_name'])) ? $info['product_name'] : ''; // String (256)	Mandatory - Mention the product name briefly. Mention the product name by coma separate. Example: Computer,Speaker
         $this->data['product_category'] = (isset($info['product_category'])) ? $info['product_category'] : ''; // String (100)	Mandatory - Mention the product category. Example: Electronic or topup or bus ticket or air ticket
+
         /*
          * String (100)
          * Mandatory - Mention goods vertical. It is very much necessary for online transactions to avoid chargeback.

@@ -80,4 +80,8 @@ class CoursesController extends Controller
             'showCourse' => $showCourse,
         ]);
     }
+
+    public function thankYou(){
+        return inertia('Frontend/Course/ThankYou');
+    }
 }

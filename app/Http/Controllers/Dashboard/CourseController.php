@@ -9,6 +9,7 @@ use \App\Models\CourseCategory;
 use App\Http\Requests\CourseRequet;
 use Illuminate\Support\Str;
 use \App\Models\Course;
+use \App\Models\Exam;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
@@ -69,7 +70,9 @@ class CourseController extends Controller
      */
     public function show(string $id)
     {
-        $showCourse = Course::with('category','courseClass', 'courseClass.videoUrl')->findOrFail($id);
+        $showCourse = Course::with('category', 'courseClass', 'courseClass.videoUrl', 'courseClass.exam', 'courseClass.exam.questions')->findOrFail($id);
+
+        $showCourse->courseClass = $showCourse->courseClass->toArray();
 
         return Inertia::render('Dashboard/Course/Show', [
             'showCourse' => $showCourse,

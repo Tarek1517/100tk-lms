@@ -28,4 +28,9 @@ class CourseClass extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    public function exam()
+    {
+        return $this->hasOne(Exam::class, 'course_class_id'); // Correct the model name if needed
+    }
 }

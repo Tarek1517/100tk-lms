@@ -12,10 +12,8 @@ const props = defineProps({
     auth: Object,
 });
 
-
 const selectedVideoUrl = ref("");
 const currentVideoIndex = ref(0);
-
 
 const openVideo = (url) => {
     if (!url || typeof url !== "string") {
@@ -32,15 +30,12 @@ const getVimeoEmbedUrl = (url) => {
     return match ? `https://player.vimeo.com/video/${match[1]}` : "";
 };
 
-
 onMounted(() => {
     if (props.course?.course_class?.length > 0) {
-
         selectedVideoUrl.value =
             props.course.course_class[0]?.video_url?.video_url;
     }
 });
-
 
 const changeVideo = (direction) => {
     if (props.course?.course_class?.length > 0) {
@@ -162,6 +157,7 @@ const changeVideo = (direction) => {
                                     <th scope="col" class="px-6 py-3">
                                         {{ course.title }} Class Videos
                                     </th>
+                                    <th scope="col" class="px-6 py-3">Exam</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -195,7 +191,15 @@ const changeVideo = (direction) => {
                                             }}</span>
                                         </button>
                                     </td>
-                                    
+
+                                    <td>
+                                        <Link
+                                            :href="`/Exam/attend_exam/${classItem.exam.id}`"
+                                            class="text-sm bg-primary hover:bg-secondary px-2 py-1 rounded text-white"
+                                        >
+                                            Attend Exam
+                                        </Link>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

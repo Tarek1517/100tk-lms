@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use \App\Models\Student;
 use \App\Models\Course;
+use \App\Models\Exam;
 
 class StudentDashboardController extends Controller
 {
@@ -48,7 +49,8 @@ class StudentDashboardController extends Controller
     public function show(string $slug)
     {
 
-        $course = Course::with('courseClass', 'courseClass.videoUrl')->where('slug', $slug)->firstOrFail();
+        $course = Course::with('courseClass', 'courseClass.videoUrl', 'courseClass.exam', 'courseClass.exam.questions')
+        ->where('slug', $slug)->firstOrFail();
 
         return Inertia::render('Frontend/StudentDashboard/Course/Classes', [
             'course' => $course,
@@ -77,5 +79,16 @@ class StudentDashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function attend_exam($id)
+    {
+        // Fetch all courses for the given student ID with required relationships
+        $AtendExam = Exam::with(['questions', 'questions.options'])
+            ->findOrFail($id);
+
+        return Inertia::render('Frontend/StudentDashboard/Course/Exam', [
+            'AtendExam' => $AtendExam,
+        ]);
     }
 }

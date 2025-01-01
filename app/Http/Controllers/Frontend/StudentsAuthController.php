@@ -44,4 +44,20 @@ class StudentsAuthController extends Controller
         ]);
     }
 
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('student')->attempt($credentials)) {
+
+            $course_id = $request->course_id;
+            return Inertia::location(route('course.checkout', ['id' => $course_id]));
+        }
+
+        // If login fails, return failure response with a message
+        return response()->json(['success' => false, 'message' => 'Your email or password is wrong!']);
+    }
+
+
+
 }

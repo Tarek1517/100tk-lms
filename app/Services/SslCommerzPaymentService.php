@@ -46,10 +46,16 @@ class SslCommerzPaymentService
             'course_id' => $data['course_id'],
             'payment_method' => "SSL Commerz",
             'student_id' => Auth::id(),
-            'payment_status' => 'paid',
+            'payment_status' => 'pending',
             'transaction_id' => $post_data['tran_id'],
             'order_date' => Carbon::now('Asia/Dhaka'),
             'delivery_type_id' => Carbon::now('Asia/Dhaka')->hour < 11 ? 2 : 1,
+        ]);
+
+        // Attach the course to the student in the pivot table and include student_id explicitly
+        Auth::user()->courses()->attach($data['course_id'], [
+            'student_id' => Auth::id(), // explicitly add student_id in pivot
+            'created_at' => now(), // optional: set the created_at timestamp for the pivot
         ]);
         // Initiate SSLCommerz Payment
         $sslc = new SslCommerzNotification();
