@@ -22,6 +22,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+Route::post('/order-success', function () {
+    return Inertia::render('Frontend/Course/ThankYou');
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/category', [HomeController::class, 'categoryCourse']);
 Route::resource('courses', CoursesController::class);
@@ -80,7 +85,7 @@ Route::middleware('auth:student')->group(function () {
 
 });
 
-Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+// Route::post('/success', [SslCommerzPaymentController::class, 'success']);
 Route::post('/fail', [SslCommerzPaymentController::class, 'cancel']);
 Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 

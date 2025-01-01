@@ -14,7 +14,7 @@ return [
     ],
     'apiDomain' => $apiDomain,
     'connect_from_localhost' => env("IS_LOCALHOST", true),
-    'success_url' => env('APP_URL') . '/success',
+    'success_url' =>'/order-success',
     'failed_url' => env('APP_URL') . '/fail',
     'cancel_url' => env('APP_URL') . '/cancel',
     'ipn_url' => env('APP_URL') . '/ipn',
