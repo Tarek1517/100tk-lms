@@ -11,10 +11,10 @@ const props = defineProps({
     errors: Array,
 });
 
-// Create Exam Question
 const questionState = useForm({
-    exam_id: props.editQuestion[0]?.exam_id || null, // Get `exam_id` from the first question
+    exam_id: props.editQuestion[0]?.exam_id || null,
     questions: props.editQuestion.map((question) => ({
+        id: question.id, // Use the id of the question
         question_text: question.question_text,
         options: question.options.map((option) => ({
             option_text: option.option_text,
@@ -24,8 +24,11 @@ const questionState = useForm({
 });
 
 const onUpdate = () => {
-    questionState.put(`/dashboard/exam-question/${questionState.exam_id}`, {
-        preserveScroll: true,
+    // Loop over the questions and update each one using its id
+    questionState.questions.forEach((question) => {
+        questionState.put(`/dashboard/exam-question/${question.id}`, {
+            preserveScroll: true,
+        });
     });
 };
 </script>
@@ -34,6 +37,7 @@ const onUpdate = () => {
         <section class="pb-20">
             <div class="w-full pr-5">
                 <div class="grid grid-cols-2 gap-5">
+                   
                     <div
                         v-for="(question, index) in questionState.questions"
                         :key="index"
@@ -44,6 +48,7 @@ const onUpdate = () => {
                             class="w-full"
                             v-model="question.question_text"
                         />
+
                         <div class="flex flex-col gap-3 py-5">
                             <div
                                 class="flex gap-3"

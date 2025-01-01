@@ -70,42 +70,24 @@ class QuestionController extends Controller
         ]);
     }
 
-    public function update(Request $request, $examId)
+    public function update(QuestionRequest $request, string $id)
     {
-        $validated = $request->validate([
-            'questions' => 'required|array',
-            'questions.*.question_text' => 'required|string',
-            'questions.*.options' => 'required|array',
-            'questions.*.options.*.option_text' => 'required|string',
-            'questions.*.options.*.is_correct' => 'required|boolean',
-        ]);
+        $request->all();
 
-        foreach ($validated['questions'] as $questionData) {
-            $question = Question::updateOrCreate(
-                ['id' => $questionData['id'] ?? null],
-                [
-                    'exam_id' => $examId,
-                    'question_text' => $questionData['question_text'],
-                ]
-            );
-
-            foreach ($questionData['options'] as $optionData) {
-                QuestionOption::updateOrCreate(
-                    ['id' => $optionData['id'] ?? null],
-                    [
-                        'question_id' => $question->id,
-                        'option_text' => $optionData['option_text'],
-                        'is_correct' => $optionData['is_correct'],
-                    ]
-                );
-            }
-        }
-
-        $exam = Exam::findOrFail($request->exam_id);
-        $courseId = $exam->examClass->course_id;
-        return Inertia::location("/dashboard/course/{$courseId}");
+        $question = Question::findOrFail($id);
+        $data = $request->validated();
+        $question->update($data);
+        // $options = [];
+        // foreach ($request->options as $option) {
+        //     $options[] = [
+        //         'question_id' => $question->id,
+        //         'option_text' => $option['option_text'],
+        //         'is_correct' => $option['is_correct'],
+        //     ];
+        // }
+        // QuestionOption::query()->insert($options);
+        return response()->noContent();
     }
-
 
     public function deleteOption($id)
     {

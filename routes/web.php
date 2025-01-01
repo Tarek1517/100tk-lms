@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\StudentLoginController;
 use App\Http\Controllers\Frontend\STDdashboard\StudentDashboardController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Dashboard\PageControler;
+use App\Http\Controllers\Dashboard\StudentExamAttemtController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -38,7 +39,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('dashboard')->middleware(['auth:sanctum'])->group(function (): void {
+Route::prefix('dashboard')->group(function (): void {
     Route::resource('student', StudentController::class);
     Route::resource('course', CourseController::class);
     Route::resource('category', CourseCategoryController::class);
@@ -50,6 +51,8 @@ Route::prefix('dashboard')->middleware(['auth:sanctum'])->group(function (): voi
     // Exam
     Route::resource('exam', ExamController::class);
     Route::resource('exam-question', QuestionController::class);
+    Route::resource('student-exam-attempt', StudentExamAttemtController::class);
+    
 
 });
 
