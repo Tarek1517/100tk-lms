@@ -75,8 +75,6 @@ Route::middleware('auth:student')->group(function () {
     Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
     Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 
-
-
 });
 
 Route::post('/success', [SslCommerzPaymentController::class, 'success']);

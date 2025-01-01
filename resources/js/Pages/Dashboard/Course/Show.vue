@@ -356,7 +356,7 @@ const onExamSubmit = () => {
                                         </button>
 
                                         <Link
-                                            :href="`/dashboard/exam-question/${classItem.exam?.id}`"
+                                            :href="`/dashboard/exam-question/${classItem.exam?.id}/edit`"
                                             v-if="
                                                 classItem.exam?.questions
                                                     ?.length > 0 &&

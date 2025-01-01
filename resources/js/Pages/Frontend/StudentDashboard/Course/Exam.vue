@@ -76,3 +76,12 @@ const props = defineProps({
         </div>
     </StudentLayout>
 </template>
+
+<style scoped>
+input[type="radio"]:checked + label {
+    background-color: #02006118;
+    span {
+        background-color: #020061;
+    }
+}
+</style>

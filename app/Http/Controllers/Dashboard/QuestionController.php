@@ -61,25 +61,51 @@ class QuestionController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $editQuestion = Question::with('exam', 'options')
+            ->where('exam_id', $id)
+            ->orderBy('created_at', 'DESC')->get();
+
+        return Inertia::render('Dashboard/Exam/EditExam', [
+            'editQuestion' => $editQuestion,
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $examId)
     {
-        $question = Question::query()->findOrFail($id);
-        $data = $request->validated();
-        $question->update($data);
-        $options = [];
-        foreach ($request->options as $option) {
-            $options[] = [
-                'question_id' => $question->id,
-                'option_text' => $option['option_text'],
-                'is_correct' => $option['is_correct'],
-            ];
+        $validated = $request->validate([
+            'questions' => 'required|array',
+            'questions.*.question_text' => 'required|string',
+            'questions.*.options' => 'required|array',
+            'questions.*.options.*.option_text' => 'required|string',
+            'questions.*.options.*.is_correct' => 'required|boolean',
+        ]);
+
+        foreach ($validated['questions'] as $questionData) {
+            $question = Question::updateOrCreate(
+                ['id' => $questionData['id'] ?? null],
+                [
+                    'exam_id' => $examId,
+                    'question_text' => $questionData['question_text'],
+                ]
+            );
+
+            foreach ($questionData['options'] as $optionData) {
+                QuestionOption::updateOrCreate(
+                    ['id' => $optionData['id'] ?? null],
+                    [
+                        'question_id' => $question->id,
+                        'option_text' => $optionData['option_text'],
+                        'is_correct' => $optionData['is_correct'],
+                    ]
+                );
+            }
         }
-        QuestionOption::query()->insert($options);
-        return response()->noContent();
+
+        $exam = Exam::findOrFail($request->exam_id);
+        $courseId = $exam->examClass->course_id;
+        return Inertia::location("/dashboard/course/{$courseId}");
     }
+
 
     public function deleteOption($id)
     {

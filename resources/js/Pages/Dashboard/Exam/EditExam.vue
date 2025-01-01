@@ -4,104 +4,51 @@ import { useForm } from "@inertiajs/vue3";
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
+import { toast } from "vue3-toastify";
 
 const props = defineProps({
-    CreateQuestion: Object,
+    editQuestion: Object,
     errors: Array,
 });
 
 // Create Exam Question
 const questionState = useForm({
-    exam_id: props.CreateQuestion.id, // need to remove 1 and make it dynamic
-    questions: [
-        {
-            question_text: null,
-            questoin_image: null,
-            options: [
-                {
-                    option_text: null,
-                    is_correct: 0,
-                },
-                {
-                    option_text: null,
-                    is_correct: 0,
-                },
-                {
-                    option_text: null,
-                    is_correct: 0,
-                },
-                {
-                    option_text: null,
-                    is_correct: 0,
-                },
-            ],
-        },
-    ],
+    exam_id: props.editQuestion[0]?.exam_id || null, // Get `exam_id` from the first question
+    questions: props.editQuestion.map((question) => ({
+        question_text: question.question_text,
+        options: question.options.map((option) => ({
+            option_text: option.option_text,
+            is_correct: option.is_correct,
+        })),
+    })),
 });
 
-const addQuestionItem = () => {
-    questionState.questions.push({
-        question_text: null,
-        questoin_image: null,
-        options: [
-            {
-                option_text: null,
-                is_correct: 0,
-            },
-            {
-                option_text: null,
-                is_correct: 0,
-            },
-            {
-                option_text: null,
-                is_correct: 0,
-            },
-            {
-                option_text: null,
-                is_correct: 0,
-            },
-        ],
+const onUpdate = () => {
+    questionState.put(`/dashboard/exam-question/${questionState.exam_id}`, {
+        preserveScroll: true,
     });
-};
-
-const removeQuestionItem = (index) => questionState.questions.splice(index, 1);
-
-const onQuiestionSubmit = () => {
-    questionState.post("/dashboard/exam-question");
 };
 </script>
 <template>
     <AuthenticatedLayout>
         <section class="pb-20">
-            {{ errors }}
             <div class="w-full pr-5">
                 <div class="grid grid-cols-2 gap-5">
-
                     <div
-                        v-for="(item, index) in questionState.questions"
+                        v-for="(question, index) in questionState.questions"
                         :key="index"
                         class="border border-primary/40 rounded-md p-3 pt-5 relative"
                     >
-                        <button
-                            v-if="questionState?.questions?.length > 1"
-                            @click="removeQuestionItem(index)"
-                            class="absolute top-1 right-1 text-sm px-2 py-1 rounded-md"
-                        >
-                            <Icon
-                                name="material-symbols:delete-outline"
-                                class="text-lg text-rose-700"
-                            />
-                        </button>
                         <InputLabel :value="`${index + 1}. Question Title`" />
                         <TextInput
                             class="w-full"
-                            v-model="item.question_text"
+                            v-model="question.question_text"
                         />
                         <div class="flex flex-col gap-3 py-5">
                             <div
                                 class="flex gap-3"
-                                v-for="(option, i) in item.options"
-                                :key="`option-${i}`"
+                                v-for="(option, i) in question.options"
+                                :key="i"
                             >
                                 <div>
                                     <InputLabel :value="`Option ${i + 1}`" />
@@ -134,20 +81,13 @@ const onQuiestionSubmit = () => {
                         </div>
                     </div>
                 </div>
-                <div class="mt-5">
-                    <button
-                        @click="addQuestionItem"
-                        class="bg-secondary text-white px-4 py-2 rounded-md text-sm font-normal"
-                    >
-                        Add More Question
-                    </button>
-                </div>
+
                 <div class="mt-10">
                     <button
-                        @click="onQuiestionSubmit"
+                        @click="onUpdate"
                         class="bg-primary w-full py-3 rounded-md text-white"
                     >
-                        Save Questions
+                        Update Questions
                     </button>
                 </div>
             </div>
