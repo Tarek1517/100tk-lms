@@ -66,7 +66,7 @@ const order = async () => {
 
 const handleLogin = async (form) => {
     try {
-        await form.post("/Login/store", {
+        await form.post("/login/store", {
             onSuccess: (response) => {
                 // Check if login was successful based on the response
                 if (response.success) {
@@ -295,7 +295,7 @@ const handleLogin = async (form) => {
                     </div>
                     <p class="text-center">
                         Don't have an account
-                        <Link href="/Student/Register" class="text-primary"
+                        <Link href="/student/register" class="text-primary"
                             >Create Account</Link
                         >.
                     </p>

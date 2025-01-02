@@ -18,7 +18,7 @@ const form = useForm({
 
 const onSubmit = async () => {
   try {
-    await form.post('/Student/Login/store', {
+    await form.post('/student/login/store', {
       onSuccess: () => {
         toast.success('Student Logged in Successfully');
       },
@@ -39,7 +39,7 @@ const onSubmit = async () => {
     <AppLayout :settings="settings">
         <div class="w-full flex justify-center items-center py-10 lg:py-20">
             <div
-                class="w-[90%] max-w-4xl bg-white flex flex-wrap rounded-xl shadow-xl p-4"
+                class="w-[90%] max-w-4xl bg-white flex flex-wrap rounded-xl shadow-xl p-4 pb-10"
             >
                 <div class="w-full lg:w-1/2 lg:pr-5 lg:pt-10">
                     <Link href="/login" class="text-2xl font-semibold mb-3"
@@ -91,7 +91,7 @@ const onSubmit = async () => {
                 <div class="hidden lg:block w-1/2">
                     <img
                         class="w-full h-96 object-cover rounded-xl"
-                        src="https://i.pinimg.com/564x/7b/3f/e1/7b3fe1e66e263b7e0c0e1f1cfb4086c7.jpg"
+                        src="@/assets/images/login.jpg"
                     />
                 </div>
             </div>

@@ -44,7 +44,7 @@ class StudentLoginController extends Controller
             $data['image'] = $image_full_name;
         }
         Student::create($data);
-        return Inertia::location(route('Student.Login'));
+        return Inertia::location(route('student.login'));
     }
 
     /**

@@ -82,7 +82,7 @@ const props = defineProps({
                                 </span>
                                 <!-- View Button -->
                                 <Link
-                                    :href="`/Coures/${course.slug}/show`"
+                                    :href="`/coures/${course.slug}/show`"
                                     class="text-white font-semibold hover:bg-secondary bg-emerald-600 px-2 py-1 rounded-sm"
                                 >
                                     <Icon

@@ -67,7 +67,7 @@ class CourseCategoryController extends Controller
 
         $category = CourseCategory::create($data);
 
-        return Inertia::location(route('category/index'));
+        return Inertia::location(route('category.index'));
 
     }
 
@@ -118,7 +118,7 @@ class CourseCategoryController extends Controller
         }
         $category->update($validated);
 
-        return Inertia::location(route('category/index'));
+        return Inertia::location(route('category.index'));
     }
 
     /**
@@ -133,7 +133,7 @@ class CourseCategoryController extends Controller
         }
         $category->delete();
 
-        return Inertia::location(route('category/index'));
+        return Inertia::location(route('category.index'));
     }
 
 }

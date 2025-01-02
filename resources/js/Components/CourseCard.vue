@@ -15,7 +15,7 @@ const props = defineProps({
                 class="w-full h-[270px] rounded-xl overflow-hidden"
             >
                 <img
-                    class="w-full h-full object-cover rounded-xl"
+                    class="w-full h-auto object-cover rounded-xl"
                     :src="`/storage/img/${course.cover_image}`"
                     :alt="course.name"
                 />

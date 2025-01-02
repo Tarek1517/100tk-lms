@@ -33,7 +33,7 @@ class StudentsAuthController extends Controller
     public function destroy(Request $request)
     {
         Auth::guard('student')->logout();  // Log the student out
-        return Inertia::location(route('Student.Login'));  // Redirect to login page after logout
+        return Inertia::location(route('student.login'));  // Redirect to login page after logout
     }
 
     public function show(string $id)

@@ -34,11 +34,11 @@ Route::resource('courses', CoursesController::class);
 Route::get('/course/checkout/{id}', [CoursesController::class, 'checkout'])->name('course.checkout');
 Route::post('/thank/page', [CoursesController::class, 'thankYou']);
 
-Route::get('/Student/Login', [StudentLoginController::class, 'index'])->name('Student.Login');
-Route::post('/Student/store', [StudentLoginController::class, 'store'])->name('Student.store');
-Route::post('/Student/Login/store', [StudentsAuthController::class, 'loginSubmit'])->name('Student.Login.store');
-Route::post('/Login/store', [StudentsAuthController::class, 'login'])->name('Login.store');
-Route::get('/Student/Register', [StudentLoginController::class, 'register'])->name('Student.Register');
+Route::get('/student/login', [StudentLoginController::class, 'index'])->name('student.login');
+Route::post('/student/store', [StudentLoginController::class, 'store'])->name('Student.store');
+Route::post('/student/login/store', [StudentsAuthController::class, 'loginSubmit'])->name('Student.Login.store');
+Route::post('/login/store', [StudentsAuthController::class, 'login'])->name('Login.store');
+Route::get('/student/register', [StudentLoginController::class, 'register'])->name('Student.Register');
 Route::post('/order-success', [OrderSuccessController::class, 'index'])->name('order-success');
 
 
@@ -73,14 +73,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth:student')->group(function () {
     Route::resource('students', StudentsAuthController::class);
-    Route::post('Student/logout', [StudentsAuthController::class, 'destroy'])->name('Student.logout');
+    Route::post('student/logout', [StudentsAuthController::class, 'destroy'])->name('student.logout');
     Route::resource('/save_order', OrderController::class);
 
     //// Student Dashboard
-    Route::get('/Coures/{id}', [StudentDashboardController::class, 'index'])->name('Coures.index');
-    Route::get('/Exam/attend_exam/{id}', [StudentDashboardController::class, 'attend_exam'])->name('Exam.attend_exam');
-    Route::get('/Exam/Result/{id}', [StudentExamAttemtController::class, 'result'])->name('Exam.Result');
-    Route::get('/Coures/{slug}/show', [StudentDashboardController::class, 'show'])->name('Coures.show');
+    Route::get('/coures/{id}', [StudentDashboardController::class, 'index'])->name('Coures.index');
+    Route::get('/exam/attend_exam/{id}', [StudentDashboardController::class, 'attend_exam'])->name('Exam.attend_exam');
+    Route::get('/exam/result/{id}', [StudentExamAttemtController::class, 'result'])->name('Exam.Result');
+    Route::get('/coures/{slug}/show', [StudentDashboardController::class, 'show'])->name('Coures.show');
     Route::resource('student-exam-attempt', StudentExamAttemtController::class);
 
     //SslCommerz route

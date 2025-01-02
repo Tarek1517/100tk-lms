@@ -60,13 +60,13 @@ const props = defineProps({
                     >
                         <Icon name="material-symbols:person" class="text-xl" />
                         <Link
-                            href="/Student/Login"
+                            href="/student/login"
                             class="hover:text-primary transition-all ease-in-out duration-500 hover:bg-white bg-primary rounded px-2 text-white"
                         >
                             Login
                         </Link>
                         <Link
-                            href="/Student/Register"
+                            href="/student/register"
                             class="hover:text-primary transition-all ease-in-out duration-500 hover:bg-white bg-primary rounded px-2 text-white"
                         >
                             Register

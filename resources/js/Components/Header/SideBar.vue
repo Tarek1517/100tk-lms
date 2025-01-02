@@ -16,7 +16,7 @@ const props = defineProps({
 });
 
 const logout = async () => {
-    await Inertia.post("/Student/logout"); // Ensure to handle logout on server-side
+    await Inertia.post("/student/logout"); // Ensure to handle logout on server-side
 };
 </script>
 
@@ -45,7 +45,7 @@ const logout = async () => {
 
             <li>
                 <Link
-                    :href="`/Coures/${user.id}`"
+                    :href="`/coures/${user.id}`"
                     class="group flex items-center gap-3 cursor-pointer relative p-2 hover:bg-secondary/10 hover:rounded-lg transition-all ease-in-out duration-500"
                 >
                     <Icon
@@ -60,7 +60,7 @@ const logout = async () => {
 
             <li>
                 <Link
-                    :href="`/Exam/Result/${user.id}`"
+                    :href="`/exam/result/${user.id}`"
                     class="group flex items-center gap-3 cursor-pointer relative p-2 hover:bg-secondary/10 hover:rounded-lg transition-all ease-in-out duration-500"
                 >
                     <Icon

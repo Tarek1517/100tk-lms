@@ -8,7 +8,6 @@ const props = defineProps({
     course_categories: Array,
     settings: Object,
     errors: Array,
-
 });
 
 const form = useForm({
@@ -41,72 +40,70 @@ const onSubmit = async () => {
                         >
                     </div>
 
+                    <div class="">
+                        <label for="name" class="block pb-1 text-xs"
+                            >Name</label
+                        >
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
+                            v-model="form.name"
+                        />
+                    </div>
 
-                    <form @submit="onSubmit">
-                        <div class="">
-                            <label for="name" class="block pb-1 text-xs"
-                                >Name</label
-                            >
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
-                                v-model="form.name"
-                            />
-                        </div>
+                    <div class="">
+                        <label for="email" class="block pb-1 text-xs"
+                            >Email</label
+                        >
+                        <input
+                            v-model="form.email"
+                            type="email"
+                            name="email"
+                            id="email"
+                            class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
+                        />
+                    </div>
 
-                        <div class="">
-                            <label for="email" class="block pb-1 text-xs"
-                                >Email</label
-                            >
-                            <input
-                                v-model="form.email"
-                                type="email"
-                                name="email"
-                                id="email"
-                                class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
-                            />
-                        </div>
+                    <div class="">
+                        <label for="phone" class="block pb-1 text-xs"
+                            >Phone</label
+                        >
+                        <input
+                            v-model="form.mobile"
+                            type="string"
+                            name="mobile"
+                            id="phone"
+                            class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
+                        />
+                    </div>
 
-                        <div class="">
-                            <label for="phone" class="block pb-1 text-xs"
-                                >Phone</label
-                            >
-                            <input
-                                v-model="form.mobile"
-                                type="string"
-                                name="mobile"
-                                id="phone"
-                                class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
-                            />
-                        </div>
-                        
+                    <div class="">
+                        <label for="password" class="block pb-1 text-xs"
+                            >Password</label
+                        >
+                        <input
+                            v-model="form.password"
+                            type="password"
+                            name="password"
+                            id="password"
+                            class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
+                        />
+                    </div>
 
-                        <div class="">
-                            <label for="password" class="block pb-1 text-xs"
-                                >Password</label
-                            >
-                            <input
-                                v-model="form.password"
-                                type="password"
-                                name="password"
-                                id="password"
-                                class="bg-transparent block w-full rounded-md p-2 shadow-sm border border-primary focus:outline-none placeholder:text-gray-400 px-3 mb-2"
-                            />
-                        </div>
+                    <div class="text-center py-5">
+                        <button
+                            @click="onSubmit"
+                            class="w-full py-2 bg-primary text-white font-bold text-center rounded-lg my-2"
+                        >
+                            Register
+                        </button>
+                    </div>
 
-                        <div class="text-center py-5">
-                            <button
-                                class="w-full py-2 bg-primary text-white font-bold text-center rounded-lg my-2"
-                            >
-                                Register
-                            </button>
-                        </div>
-                    </form>
                     <p class="mb-5 text-center">
                         Do you have an account?
-                        <Link href="/Student/Login" class="text-primary"
+                        <Link href="/student/login" class="text-primary"
                             >Login</Link
                         >
                     </p>
