@@ -70,7 +70,7 @@ class QuestionController extends Controller
     {
 
         $data = $request->validated();
-        
+
         foreach ($data['questions'] as $questionData) {
 
             $question = Question::findOrFail($questionData['id']);
@@ -79,21 +79,21 @@ class QuestionController extends Controller
                 'question_text' => $questionData['question_text'],
             ]);
 
-            if (isset($questionData['options'])) {
-                foreach ($questionData['options'] as $optionData) {
+            // if (isset($questionData['options'])) {
+            //     foreach ($questionData['options'] as $optionData) {
 
-                    if (isset($optionData['id'])) {
+            //         if (isset($optionData['id'])) {
 
-                        $option = $question->options()->where('id', $optionData['id'])->first();
-                        if ($option) {
-                            $option->update([
-                                'option_text' => $optionData['option_text'],
-                                'is_correct' => $optionData['is_correct'],
-                            ]);
-                        }
-                    }
-                }
-            }
+            //             $option = $question->options()->where('id', $optionData['id'])->first();
+            //             if ($option) {
+            //                 $option->update([
+            //                     'option_text' => $optionData['option_text'],
+            //                     'is_correct' => $optionData['is_correct'],
+            //                 ]);
+            //             }
+            //         }
+            //     }
+            // }
         }
 
         $exam = Exam::findOrFail($data['exam_id']);
