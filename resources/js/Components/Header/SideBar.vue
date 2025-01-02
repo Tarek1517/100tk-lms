@@ -60,6 +60,22 @@ const logout = async () => {
 
             <li>
                 <Link
+                    :href="`/Exam/Result/${user.id}`"
+                    class="group flex items-center gap-3 cursor-pointer relative p-2 hover:bg-secondary/10 hover:rounded-lg transition-all ease-in-out duration-500"
+                >
+                    <Icon
+                        name="carbon:question-answering"
+                        class="text-2xl transition-all ease-in-out duration-500"
+                    />
+                    <span class="transition-all ease-in-out duration-500"
+                        >
+                        ফলাফল </span
+                    >
+                </Link>
+            </li>
+
+            <li>
+                <Link
                     href="/dashboard/setting"
                     class="group flex items-center gap-3 cursor-pointer relative p-2 hover:bg-secondary/10 hover:rounded-lg transition-all ease-in-out duration-500"
                 >

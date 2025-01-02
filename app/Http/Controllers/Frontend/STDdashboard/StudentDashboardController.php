@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use \App\Models\Student;
 use \App\Models\Course;
 use \App\Models\Exam;
+use \App\Models\StudentExamAttempt;
 
 class StudentDashboardController extends Controller
 {
@@ -50,7 +51,7 @@ class StudentDashboardController extends Controller
     {
 
         $course = Course::with('courseClass', 'courseClass.videoUrl', 'courseClass.exam', 'courseClass.exam.questions')
-        ->where('slug', $slug)->firstOrFail();
+            ->where('slug', $slug)->firstOrFail();
 
         return Inertia::render('Frontend/StudentDashboard/Course/Classes', [
             'course' => $course,
@@ -91,4 +92,6 @@ class StudentDashboardController extends Controller
             'AtendExam' => $AtendExam,
         ]);
     }
+
+   
 }

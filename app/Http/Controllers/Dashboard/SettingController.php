@@ -42,15 +42,18 @@ class SettingController extends Controller
         $allCategories = CourseCategory::with('parent', 'children', 'course')->orderBy('order_number')
             ->get();
 
-        $footerColumns = Footer::orderBy('order_number')->get();
-        $pages = Page::get();
+            $footerColumns = Footer::query()->orderBy('order_number')->get();
+            foreach ($footerColumns as $column) {
+                $footerPageIds = json_decode($column->pages);
+                $footerPages = Page::query()->whereIn('id', $footerPageIds)->select('slug', 'title')->get();
+                $column['pages'] = $footerPages;
+            }
 
         return Inertia::render('Dashboard/Setting/Index', [
             'parentCategories' => $parentCategories,
             'allCategories' => $allCategories,
             'footerColumns' => $footerColumns,
             'settings' => $settings,
-            'pages' => $pages,
         ]);
     }
 

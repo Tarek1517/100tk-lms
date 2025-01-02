@@ -15,5 +15,5 @@ const props = defineProps({
             <slot name="student" v-if="isStudent" />
             <slot v-else />
         </main>
-    <Footer />
+    <Footer :settings="settings" />
 </template>

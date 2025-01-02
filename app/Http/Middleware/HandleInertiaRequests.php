@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 use \App\Models\CourseCategory;
+use App\Models\Footer;
+use App\Models\Page;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -43,6 +45,16 @@ class HandleInertiaRequests extends Middleware
                 ->get();
         }
 
+        $HeadercategoryIds = json_decode(getSetting('header_categories'));
+        $HeaderCategories = [];
+        if ($HeadercategoryIds !== null && count($HeadercategoryIds) > 0) {
+            $HeaderCategories = CourseCategory::whereIn('id', $HeadercategoryIds ?? [])
+                ->select('id', 'slug', 'image', 'name', 'parent_id', 'subtitle')
+                ->with('children:id,name,slug,parent_id,image,subtitle')
+                ->orderBy('order_number')
+                ->get();
+        }
+
         // Fetch course categories from settings
         $CoursecategoryIds = json_decode(getSetting('course_categories'));
         $CourseCategories = [];
@@ -55,11 +67,18 @@ class HandleInertiaRequests extends Middleware
                 ->get();
         }
 
+        $footerColumns = Footer::query()->orderBy('order_number')->get();
+        foreach ($footerColumns as $column) {
+            $footerPageIds = json_decode($column->pages);
+            $footerPages = Page::query()->whereIn('id', $footerPageIds)->select('slug', 'title')->get();
+            $column['pages'] = $footerPages;
+        }
+
         // Fetch general settings for the app
         $settings = [
             'home_categories' => $HomeCategories,
             'course_categories' => $CourseCategories,
-            'header_categories' => json_decode(getSetting('header_categories')),
+            'header_categories' => $HeaderCategories,
             'currency_symbol' => getSetting('currency_symbol'),
             'address' => getSetting('address'),
             'email' => getSetting('email'),
@@ -69,19 +88,21 @@ class HandleInertiaRequests extends Middleware
             'instagram_link' => getSetting('instagram_link'),
             'linkedin_link' => getSetting('linkedin_link'),
             'Skype_link' => getSetting('Skype_link'),
+            'footer_columns' => $footerColumns,
+            
         ];
 
         return array_merge(parent::share($request), [
             // Authenticated student data
             'auth' => [
                 'validStudent' => $request->user('student')
-                ? $request->user('student')->only('id', 'name', 'email')
-                : null,
+                    ? $request->user('student')->only('id', 'name', 'email')
+                    : null,
             ],
 
             // Ziggy routes and location
             'ziggy' => fn() => [
-                 ...(new Ziggy)->toArray(),
+                ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
 

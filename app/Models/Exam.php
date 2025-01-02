@@ -19,5 +19,9 @@ class Exam extends Model
 	{
 		return  $this->hasMany(Question::class);
 	}
+	public function result()
+	{
+		return  $this->hasMany(StudentExamAttempt::class, 'exam_id');
+	}
 
 }

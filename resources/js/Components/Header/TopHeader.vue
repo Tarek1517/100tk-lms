@@ -8,7 +8,6 @@ const props = defineProps({
     settings: Object,
     auth: Object,
 });
-
 </script>
 
 <template>
@@ -44,15 +43,16 @@ const props = defineProps({
                         v-if="page.props?.auth?.validStudent"
                         class="flex items-center text-base font-semibold text-white"
                     >
-
                         <Link
                             :href="`/students/${user.id}`"
                             class="hover:text-primary rounded text-white flex items-center"
                         >
-                        <Icon name="material-symbols:person" class="text-xl mr-1" />
+                            <Icon
+                                name="material-symbols:person"
+                                class="text-xl mr-1"
+                            />
                             {{ user.name }}
                         </Link>
-
                     </div>
                     <div
                         v-else
@@ -73,28 +73,49 @@ const props = defineProps({
                         </Link>
                     </div>
                     <!-- If user is authenticated -->
-
                     <span class="border-r-2 border-gray-700"></span>
                     <div
                         class="flex items-center text-base font-semibold text-white gap-3"
                     >
                         <p class="">Follow Us</p>
-                        <Icon
-                            name="ri:facebook-fill"
-                            class="text-xl hover:text-primary transition-all ease-in-out duration-500"
-                        />
-                        <Icon
-                            name="ri:instagram-line"
-                            class="text-xl hover:text-primary transition-all ease-in-out duration-500"
-                        />
-                        <Icon
-                            name="basil:skype-solid"
-                            class="text-xl hover:text-primary transition-all ease-in-out duration-500"
-                        />
-                        <Icon
-                            name="uil:youtube"
-                            class="text-xl hover:text-primary transition-all ease-in-out duration-500"
-                        />
+
+                        <a
+                            :href="settings?.facebook_link"
+                            class="flex items-center"
+                        >
+                            <Icon
+                                name="ri:facebook-fill"
+                                class="text-xl hover:text-primary transition-all ease-in-out duration-500"
+                            />
+                        </a>
+
+                        <a
+                            :href="settings?.instagram_link"
+                            class="flex items-center"
+                        >
+                            <Icon
+                                name="ri:instagram-line"
+                                class="text-xl hover:text-primary transition-all ease-in-out duration-500"
+                            />
+                        </a>
+                        <a
+                            :href="settings?.Skype_link"
+                            class="flex items-center"
+                        >
+                            <Icon
+                                name="basil:skype-solid"
+                                class="text-xl hover:text-primary transition-all ease-in-out duration-500"
+                            />
+                        </a>
+                        <a
+                            :href="settings?.youtube_link"
+                            class="flex items-center"
+                        >
+                            <Icon
+                                name="uil:youtube"
+                                class="text-xl hover:text-primary transition-all ease-in-out duration-500"
+                            />
+                        </a>
                     </div>
                 </div>
             </div>

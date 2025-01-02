@@ -58,8 +58,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function (): void {
     // Exam
     Route::resource('exam', ExamController::class);
     Route::resource('exam-question', QuestionController::class);
-    Route::resource('student-exam-attempt', StudentExamAttemtController::class);
-    
+
+
 
 });
 
@@ -79,7 +79,9 @@ Route::middleware('auth:student')->group(function () {
     //// Student Dashboard
     Route::get('/Coures/{id}', [StudentDashboardController::class, 'index'])->name('Coures.index');
     Route::get('/Exam/attend_exam/{id}', [StudentDashboardController::class, 'attend_exam'])->name('Exam.attend_exam');
+    Route::get('/Exam/Result/{id}', [StudentExamAttemtController::class, 'result'])->name('Exam.Result');
     Route::get('/Coures/{slug}/show', [StudentDashboardController::class, 'show'])->name('Coures.show');
+    Route::resource('student-exam-attempt', StudentExamAttemtController::class);
 
     //SslCommerz route
     Route::post('/pay', [SslCommerzPaymentController::class, 'index']);

@@ -7,6 +7,7 @@ use App\Models\StudentExamAttempt;
 use App\Models\QuestionOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class StudentExamAttemtController extends Controller
 {
@@ -52,8 +53,11 @@ class StudentExamAttemtController extends Controller
 			'student_id' => $validated['student_id'],
 			'exam_id' => $validated['exam_id'],
 			'score' => $score,
-			'is_passed' => $score >= 50 ? 1 : 0, 
+			'is_passed' => $score >= 50 ? 1 : 0,
 		]);
+
+        return Inertia::location("/Exam/Result/{$validated['student_id']}");
+
     }
 
     /**
@@ -86,5 +90,17 @@ class StudentExamAttemtController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function result($id)
+    {
+        // Fetch all courses for the given student ID with required relationships
+        $Results = StudentExamAttempt::where('student_id', $id)
+            ->with('exam')
+            ->get();
+
+        return Inertia::render('Frontend/StudentDashboard/Course/Result', [
+            'Results' => $Results,
+        ]);
     }
 }

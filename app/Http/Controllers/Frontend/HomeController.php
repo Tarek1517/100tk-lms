@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use \App\Models\CourseCategory;
 use \App\Models\Course;
+use App\Models\Footer;
+use App\Models\Page;
 
 use function App\Http\Helpers\getSetting;
 
@@ -25,16 +27,33 @@ class HomeController extends Controller
                 ->get();
         }
 
+        $HeadercategoryIds = json_decode(getSetting('header_categories'));
+        $HeaderCategories = [];
+        if ($HeadercategoryIds !== null && count($HeadercategoryIds) > 0) {
+            $HeaderCategories = CourseCategory::whereIn('id', $HeadercategoryIds ?? [])
+                ->select('id', 'slug', 'image', 'name', 'parent_id', 'subtitle')
+                ->with('children:id,name,slug,parent_id,image,subtitle')
+                ->orderBy('order_number')
+                ->get();
+        }
+
         $CoursecategoryIds = json_decode(getSetting('course_categories'));
         $CourseCategories = [];
         if ($CoursecategoryIds !== null && count($CoursecategoryIds) > 0) {
             $CourseCategories = CourseCategory::whereIn('id', $CoursecategoryIds ?? [])
-                ->with('course:id,category_id,title,cover_image,price,short_description,description','course.courseClass')
+                ->with('course:id,category_id,title,cover_image,price,short_description,description', 'course.courseClass')
                 ->get();
         }
 
+        $footerColumns = Footer::query()->orderBy('order_number')->get();
+        foreach ($footerColumns as $column) {
+            $footerPageIds = json_decode($column->pages);
+            $footerPages = Page::query()->whereIn('id', $footerPageIds)->select('slug', 'title')->get();
+            $column['pages'] = $footerPages;
+        }
+
         $settings = [
-            'header_categories' => json_decode(getSetting('header_categories')),
+            'header_categories' => $HeaderCategories,
             'home_categories' => $HomeCategories,
             'course_categories' => $CourseCategories,
             'currency_symbol' => getSetting('currency_symbol'),
@@ -46,8 +65,8 @@ class HomeController extends Controller
             'instagram_link' => getSetting('instagram_link'),
             'linkedin_link' => getSetting('linkedin_link'),
             'Skype_link' => getSetting('Skype_link'),
+            'footer_columns' => $footerColumns,
         ];
-
 
 
         return Inertia::render('Frontend/Home/Index', [
@@ -64,7 +83,7 @@ class HomeController extends Controller
         return Inertia::render('Frontend/Course/Category', [
             'AllCourses' => $AllCourses,
         ]);
-       
+
 
     }
 }

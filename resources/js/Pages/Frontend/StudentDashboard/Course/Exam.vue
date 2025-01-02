@@ -37,7 +37,7 @@ const onAnsSubmit = () => {
         alert("Please attempt at least one question before submitting.");
         return;
     }
-    examAns.post('/dashboard/student-exam-attempt', {
+    examAns.post('/student-exam-attempt', {
         onSuccess: () => {
             alert("Exam submitted successfully!");
         },
@@ -115,7 +115,7 @@ const onAnsSubmit = () => {
     </StudentLayout>
 </template>
 
-<<<<<<< HEAD
+
 <style scoped>
 input[type="radio"]:checked + label {
     background-color: #02006118;
@@ -124,14 +124,5 @@ input[type="radio"]:checked + label {
     }
 }
 </style>
-=======
 
-<style scoped>
-	input[type="radio"]:checked + label {
-		background-color: #02006118;
-		span {
-			background-color: #020061;
-		}
-	}
-</style>
->>>>>>> 82e5bc8a1f57b367ea2d178ad5f99b16b8aaf974
+
