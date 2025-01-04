@@ -38,7 +38,6 @@ const onImageSelected = (event) => {
     }
 };
 
-
 const onUpdate = () => {
     form.post(`/dashboard/course/${props?.editCourse?.id}`, {
         forceFormData: true,
@@ -102,131 +101,126 @@ watch(
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
                 <div class="shadow-lg rounded-lg p-4 max-w-3xl mx-auto">
-                    <form @submit="onUpdate">
-                        <div>
-                            <div class="flex items-center flex-wrap">
-                                <div class="w-full">
-                                    <label for="name" class="text-sm block mb-2"
-                                        >Course Title</label
+                    <div>
+                        <div class="flex items-center flex-wrap">
+                            <div class="w-full">
+                                <label for="name" class="text-sm block mb-2"
+                                    >Course Title</label
+                                >
+                                <input
+                                    v-model="form.title"
+                                    type="text"
+                                    class="border border-primary rounded-md font-normal text-sm w-full"
+                                />
+                            </div>
+
+                            <div class="w-full">
+                                <label for="name" class="text-sm block mb-2"
+                                    >Select Category</label
+                                >
+                                <select
+                                    v-model="form.category_id"
+                                    id="category"
+                                    class="w-full border border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
+                                >
+                                    <option value="" disabled>
+                                        Select a category
+                                    </option>
+                                    <option
+                                        v-for="category in allCategories"
+                                        :key="category.id"
+                                        :value="category.id"
                                     >
-                                    <input
-                                        v-model="form.title"
-                                        type="text"
-                                        class="border border-primary rounded-md font-normal text-sm w-full"
+                                        {{ category.name }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="w-full">
+                                <label for="name" class="text-sm block mb-2"
+                                    >price</label
+                                >
+                                <input
+                                    v-model="form.price"
+                                    type="number"
+                                    class="border border-primary rounded-md font-normal text-sm w-full"
+                                />
+                            </div>
+
+                            <div class="w-full">
+                                <label for="name" class="text-sm block mb-2"
+                                    >Short Description</label
+                                >
+                                <textarea
+                                    class="p-2 w-full focus:outline-none focus:ring-secondary rounded-md ring-0 bg-white border border-primary shadow-md shadow-common/50 transition-all ease-in-out duration-100"
+                                    v-model="form.short_description"
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center my-10 border border-primary border-dotted p-3 rounded-md"
+                        >
+                            <div class="w-full">
+                                <label
+                                    for="category-icon"
+                                    class="text-sm block mb-2"
+                                    >Cover Image</label
+                                >
+                                <label
+                                    class="border border-common border-dashed p-4 rounded-2xl flex items-center justify-center w-full h-52 cursor-pointer"
+                                >
+                                    <!-- Image Preview -->
+                                    <img
+                                        v-if="form.imagePreview"
+                                        :src="form.imagePreview"
+                                        alt="Category Image Preview"
+                                        class="w-1/3 h-auto mb-5"
                                     />
-                                </div>
-
-                                <div class="w-full">
-                                    <label for="name" class="text-sm block mb-2"
-                                        >Select Category</label
+                                    <!-- If No Image Selected -->
+                                    <div
+                                        v-if="!form.imagePreview"
+                                        class="flex flex-col items-center justify-center gap-2"
                                     >
-                                    <select
-                                        v-model="form.category_id"
-                                        id="category"
-                                        class="w-full border border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
-                                    >
-                                        <option value="" disabled>
-                                            Select a category
-                                        </option>
-                                        <option
-                                            v-for="category in allCategories"
-                                            :key="category.id"
-                                            :value="category.id"
+                                        <Icon
+                                            name="tabler:cloud-upload"
+                                            class="text-common text-5xl opacity-85"
+                                        />
+                                        <span
+                                            class="text-common font-semibold opacity-85"
                                         >
-                                            {{ category.name }}
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="w-full">
-                                    <label for="name" class="text-sm block mb-2"
-                                        >price</label
-                                    >
+                                            Upload Category Image
+                                        </span>
+                                    </div>
+                                    <!-- Hidden Input for File Selection -->
                                     <input
-                                        v-model="form.price"
-                                        type="number"
-                                        class="border border-primary rounded-md font-normal text-sm w-full"
+                                        id="category-icon"
+                                        @change="onImageSelected"
+                                        type="file"
+                                        hidden
                                     />
-                                </div>
-
-                                <div class="w-full">
-                                    <label for="name" class="text-sm block mb-2"
-                                        >Short Description</label
-                                    >
-                                    <textarea
-                                        class="p-2 w-full focus:outline-none focus:ring-secondary rounded-md ring-0 bg-white border border-primary shadow-md shadow-common/50 transition-all ease-in-out duration-100"
-                                        v-model="form.short_description"
-                                    ></textarea>
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex items-center my-10 border border-primary border-dotted p-3 rounded-md"
-                            >
-                                <div class="w-full">
-                                    <label
-                                        for="category-icon"
-                                        class="text-sm block mb-2"
-                                        >Cover Image</label
-                                    >
-                                    <label
-                                        class="border border-common border-dashed p-4 rounded-2xl flex items-center justify-center w-full h-52 cursor-pointer"
-                                    >
-                                        <!-- Image Preview -->
-                                        <img
-                                            v-if="form.imagePreview"
-                                            :src="form.imagePreview"
-                                            alt="Category Image Preview"
-                                            class="w-1/3 h-auto mb-5"
-                                        />
-                                        <!-- If No Image Selected -->
-                                        <div
-                                            v-if="!form.imagePreview"
-                                            class="flex flex-col items-center justify-center gap-2"
-                                        >
-                                            <Icon
-                                                name="tabler:cloud-upload"
-                                                class="text-common text-5xl opacity-85"
-                                            />
-                                            <span
-                                                class="text-common font-semibold opacity-85"
-                                            >
-                                                Upload Category Image
-                                            </span>
-                                        </div>
-                                        <!-- Hidden Input for File Selection -->
-                                        <input
-                                            id="category-icon"
-                                            @change="onImageSelected"
-                                            type="file"
-                                            hidden
-                                        />
-                                    </label>
-                                </div>
+                                </label>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="w-full">
-                            <label for="description" class="text-sm block mb-2"
-                                >Description</label
-                            >
-                            <div class="editor_data">
-                                <div
-                                    ref="quillEditor"
-                                    class="quill-editor"
-                                ></div>
-                            </div>
+                    <div class="w-full">
+                        <label for="description" class="text-sm block mb-2"
+                            >Description</label
+                        >
+                        <div class="editor_data">
+                            <div ref="quillEditor" class="quill-editor"></div>
                         </div>
+                    </div>
 
-                        <div class="mt-5">
-                            <button
-                                class="bg-secondary py-2 px-10 text-white rounded-md hover:bg-primary"
-                                type="submit"
-                            >
-                                update Course
-                            </button>
-                        </div>
-                    </form>
+                    <div class="mt-5">
+                        <button
+                            class="bg-secondary py-2 px-10 text-white rounded-md hover:bg-primary"
+                            @click="onUpdate"
+                        >
+                            update Course
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

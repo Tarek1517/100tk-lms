@@ -201,7 +201,7 @@ const changeVideo = (direction) => {
                                         </div>
                                         <Link
                                             v-else
-                                            :href="`/Exam/attend_exam/${classItem.exam.id}`"
+                                            :href="`/exam/attend_exam/${classItem.exam.id}`"
                                             class="text-sm bg-primary hover:bg-secondary px-2 py-1 rounded text-white"
                                         >
                                             attend

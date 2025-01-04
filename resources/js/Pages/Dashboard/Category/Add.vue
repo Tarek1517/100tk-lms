@@ -55,7 +55,7 @@ const onSubmit = async () => {
 
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
                 <div class="shadow-lg rounded-lg p-4 max-w-3xl mx-auto">
-                    <form @submit.prevent="onSubmit">
+
                         <div>
                             <div class="flex items-center flex-wrap">
                                 <div class="w-full">
@@ -160,12 +160,12 @@ const onSubmit = async () => {
                         <div class="mt-5">
                             <button
                                 class="bg-secondary py-2 px-10 text-white rounded-md hover:bg-primary"
-                                @click.prevent="onSubmit"
+                                @click="onSubmit"
                             >
                                 Save Category
                             </button>
                         </div>
-                    </form>
+
                 </div>
             </div>
         </section>

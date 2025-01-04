@@ -56,7 +56,7 @@ class StudentExamAttemtController extends Controller
 			'is_passed' => $score >= 50 ? 1 : 0,
 		]);
 
-        return Inertia::location("/Exam/Result/{$validated['student_id']}");
+        return Inertia::location("/exam/result/{$validated['student_id']}");
 
     }
 
